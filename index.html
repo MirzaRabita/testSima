@@ -3,30 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SİMA mobil yönləndirmə</title>
+<title>SİMA Mobil Yönləndirmə</title>
 <script>
-function redirectToSima() {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+function openSima() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-    // Sizin qr-dakı HTTPS link
-    const httpsLink = "https://ib.rabitabank.com/InterBankFrontProxyTest/sima/GetFileSign/v1/?tsquery=eyJTaWduYWJsZUNvbnRhaW5lciI6eyJQcm90b0luZm8iOnsiTmFtZSI6IndlYjJhcHAiLCJWZXJzaW9uIjoiMS4zIn0sIk9wZXJhdGlvbkluZm8iOnsiVHlwZSI6IkF1dGgiLCJPcGVyYXRpb25JZCI6IjcwNDI4OWE1LTdiZmYtNDkxMy04YmNhLTNmZDRlYzljNzkwZCIsIk5iZlVUQyI6MTc1NDIxOTcyMywiRXhwVVRDIjoxNzU5NDkwMTIzLCJBc3NpZ25lZSI6W119LCJDbGllbnRJbmZvIjp7IkNsaWVudElkIjoyMDE2MTcyLCJJY29uVVJJIjoiaHR0cHM6Ly93d3cucmFiaXRhYmFuay5jb20vaW1hZ2VzL3JhYml0ZWJhbmsuc3ZnIiwiQ2FsbGJhY2siOiJodHRwczovL2liLnJhYml0YWJhbmsuY29tL0ludGVyQmFua0Zyb250UHJveHlUZXN0L3NpbWEvQXV0aENhbGxCYWNrL3YxIiwiQ2xpZW50TmFtZSI6IlJhYml0YUJhbmsgSUIiLCJIb3N0TmFtZSI6bnVsbH0sIkRhdGFJbmZvIjpudWxsfSwiSGVhZGVyIjp7IkFsZ05hbWUiOiJITUFDU0hBMjU2IiwiU2lnbmF0dXJlIjoib2lCOE1vVkJKRU0vejlXeDNSXHUwMDJCaFdDYmhvNUw1bktOd28yS1hyUVl3dFpFPSJ9fQ==";
+    // Deep link (custom scheme)
+    const deepLink = "sima://web2app?tsquery=eyJTaWduYWJsZUNvbnRhaW5lciI6eyJQcm90b0luZm8iOnsiTmFtZSI6IndlYjJhcHAiLCJWZXJzaW9uIjoiMS4zIn0sIk9wZXJhdGlvbkluZm8iOnsiVHlwZSI6IkF1dGgiLCJPcGVyYXRpb25JZCI6IjcwNDI4OWE1LTdiZmYtNDkxMy04YmNhLTNmZDRlYzljNzkwZCIsIk5iZlVUQyI6MTc1NDIxOTcyMywiRXhwVVRDIjoxNzU5NDkwMTIzLCJBc3NpZ25lZSI6W119LCJDbGllbnRJbmZvIjp7IkNsaWVudElkIjoyMDE2MTcyLCJJY29uVVJJIjoiaHR0cHM6Ly93d3cucmFiaXRhYmFuay5jb20vaW1hZ2VzL3JhYml0ZWJhbmsuc3ZnIiwiQ2FsbGJhY2siOiJodHRwczovL2liLnJhYml0YWJhbmsuY29tL0ludGVyQmFua0Zyb250UHJveHlUZXN0L3NpbWEvQXV0aENhbGxCYWNrL3YxIiwiQ2xpZW50TmFtZSI6IlJhYml0YUJhbmsgSUIiLCJIb3N0TmFtZSI6bnVsbH0sIkRhdGFJbmZvIjpudWxsfSwiSGVhZGVyIjp7IkFsZ05hbWUiOiJITUFDU0hBMjU2IiwiU2lnbmF0dXJlIjoib2lCOE1vVkJKRU0vejlXeDNSXHUwMDJCaFdDYmhvNUw1bktOd28yS1hyUVl3dFpFPSJ9fQ==";
 
-    // Deep link formatı (iOS/Android app quraşdırılıbsa)
-    const simaDeepLink = "sima://web2app?tsquery=eyJTaWduYWJsZUNvbnRhaW5lciI6eyJQcm90b0luZm8iOnsiTmFtZSI6IndlYjJhcHAiLCJWZXJzaW9uIjoiMS4zIn0sIk9wZXJhdGlvbkluZm8iOnsiVHlwZSI6IkF1dGgiLCJPcGVyYXRpb25JZCI6IjcwNDI4OWE1LTdiZmYtNDkxMy04YmNhLTNmZDRlYzljNzkwZCIsIk5iZlVUQyI6MTc1NDIxOTcyMywiRXhwVVRDIjoxNzU5NDkwMTIzLCJBc3NpZ25lZSI6W119LCJDbGllbnRJbmZvIjp7IkNsaWVudElkIjoyMDE2MTcyLCJJY29uVVJJIjoiaHR0cHM6Ly93d3cucmFiaXRhYmFuay5jb20vaW1hZ2VzL3JhYml0ZWJhbmsuc3ZnIiwiQ2FsbGJhY2siOiJodHRwczovL2liLnJhYml0YWJhbmsuY29tL0ludGVyQmFua0Zyb250UHJveHlUZXN0L3NpbWEvQXV0aENhbGxCYWNrL3YxIiwiQ2xpZW50TmFtZSI6IlJhYml0YUJhbmsgSUIiLCJIb3N0TmFtZSI6bnVsbH0sIkRhdGFJbmZvIjpudWxsfSwiSGVhZGVyIjp7IkFsZ05hbWUiOiJITUFDU0hBMjU2IiwiU2lnbmF0dXJlIjoib2lCOE1vVkJKRU0vejlXeDNSXHUwMDJCaFdDYmhvNUw1bktOd28yS1hyUVl3dFpFPSJ9fQ==";
+    // Fallback link (HTTPS)
+    const fallbackLink = "https://ib.rabitabank.com/InterBankFrontProxyTest/sima/GetFileSign/v1/?tsquery=eyJTaWduYWJsZUNvbnRhaW5lciI6eyJQcm90b0luZm8iOnsiTmFtZSI6IndlYjJhcHAiLCJWZXJzaW9uIjoiMS4zIn0sIk9wZXJhdGlvbkluZm8iOnsiVHlwZSI6IkF1dGgiLCJPcGVyYXRpb25JZCI6IjcwNDI4OWE1LTdiZmYtNDkxMy04YmNhLTNmZDRlYzljNzkwZCIsIk5iZlVUQyI6MTc1NDIxOTcyMywiRXhwVVRDIjoxNzU5NDkwMTIzLCJBc3NpZ25lZSI6W119LCJDbGllbnRJbmZvIjp7IkNsaWVudElkIjoyMDE2MTcyLCJJY29uVVJJIjoiaHR0cHM6Ly93d3cucmFiaXRhYmFuay5jb20vaW1hZ2VzL3JhYml0ZWJhbmsuc3ZnIiwiQ2FsbGJhY2siOiJodHRwczovL2liLnJhYml0YWJhbmsuY29tL0ludGVyQmFua0Zyb250UHJveHlUZXN0L3NpbWEvQXV0aENhbGxCYWNrL3YxIiwiQ2xpZW50TmFtZSI6IlJhYml0YUJhbmsgSUIiLCJIb3N0TmFtZSI6bnVsbH0sIkRhdGFJbmZvIjpudWxsfSwiSGVhZGVyIjp7IkFsZ05hbWUiOiJITUFDU0hBMjU2IiwiU2lnbmF0dXJlIjoib2lCOE1vVkJKRU0vejlXeDNSXHUwMDJCaFdDYmhvNUw1bktOd28yS1hyUVl3dFpFPSJ9fQ==";
 
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location = simaDeepLink;
-       
-    } else if (/android/i.test(userAgent)) {
-        window.location = simaDeepLink;
-       
+    // Mobil cihaz yoxlaması
+    if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) {
+        window.location = deepLink;
+        setTimeout(() => { window.location = fallbackLink; }, 1500);
+    } else if (/android/i.test(ua)) {
+        window.location = deepLink;
+        setTimeout(() => { window.location = fallbackLink; }, 1500);
     } else {
-        window.location = httpsLink; // Desktop
+        window.location = fallbackLink; // Desktop
     }
 }
 </script>
 </head>
-<body onload="redirectToSima()">
-<p style="text-align:center; margin-top:50px;">SİMA tətbiqi yoxdursa brauzerdə açılır...</p>
+<body>
+<div style="text-align:center; margin-top:50px;">
+    <h2>SİMA tətbiqini açmaq üçün düyməni basın</h2>
+    <button onclick="openSima()" style="padding:10px 20px; font-size:16px;">Try SİMA App</button>
+    <p style="margin-top:20px;">Əgər tətbiq quraşdırılmayıbsa, brauzerdə açılacaq.</p>
+</div>
 </body>
 </html>
